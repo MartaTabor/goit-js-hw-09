@@ -7,6 +7,7 @@ const daysElement = document.querySelector('[data-days]');
 const hoursElement = document.querySelector('[data-hours]');
 const minutesElement = document.querySelector('[data-minutes]');
 const secondsElement = document.querySelector('[data-seconds]');
+const datePicker = document.querySelector('#datetime-picker');
 
 let timer = null;
 let flatpickrInstance = null;
@@ -50,13 +51,13 @@ function updateCounter() {
   const selectedDate = flatpickrInstance.selectedDates[0];
   const currentDate = new Date();
   const timeDifference = selectedDate - currentDate;
+  btnStart.disabled = true;
+  datePicker.disabled = true;
 
-  if (timeDifference <= 0) {
+  if (timeDifference < 0) {
     clearInterval(timer);
-    daysElement.textContent = '00';
-    hoursElement.textContent = '00';
-    minutesElement.textContent = '00';
-    secondsElement.textContent = '00';
+    btnStart.disabled = false;
+    datePicker.disabled = false;
     return;
   }
 
